@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123c35">
+  <meta name="description" content="Servicios útiles, contactos importantes y números de emergencia en un solo lugar.">
+  <title>Cerca | Servicios útiles</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Cerca, inicio"><span class="brand-mark">C</span><span>Cerca<span class="brand-dot">.</span><small>Servicios útiles</small></span></a>
+    <button id="installBtn" class="install-btn" hidden>＋ Instalar</button>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">TU AYUDA, MÁS CERCA</span>
+        <h1>Lo que necesitas,<br><em>en un solo lugar.</em></h1>
+        <p>Encuentra contactos importantes y guarda los servicios que utilizas.</p>
+      </div>
+      <div class="hero-symbol" aria-hidden="true">✳</div>
+    </section>
+
+    <section class="emergency-panel" aria-labelledby="emergencyTitle">
+      <div class="section-heading emergency-heading">
+        <div><span class="eyebrow light">ATENCIÓN INMEDIATA</span><h2 id="emergencyTitle">Emergencias</h2></div>
+        <span class="pulse">● Disponible para llamar</span>
+      </div>
+      <div id="emergencyGrid" class="emergency-grid"></div>
+      <p class="tiny light-muted">Si estás en peligro, busca un lugar seguro y contacta directamente al servicio correspondiente.</p>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <div><span class="eyebrow">DIRECTORIO PERSONAL</span><h2>Servicios útiles</h2></div>
+        <button id="addBtn" class="add-btn" aria-label="Agregar servicio">＋ <span>Agregar</span></button>
+      </div>
+      <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar un servicio o contacto..." autocomplete="off"></label>
+      <div id="filters" class="filters" aria-label="Filtrar servicios">
+        <button class="filter active" data-filter="Todos">Todos</button>
+        <button class="filter" data-filter="Salud">Salud</button>
+        <button class="filter" data-filter="Transporte">Transporte</button>
+        <button class="filter" data-filter="Hogar">Hogar</button>
+        <button class="filter" data-filter="Otros">Otros</button>
+      </div>
+      <div id="serviceList" class="service-list"></div>
+      <div id="emptyState" class="empty-state" hidden><span>⌕</span><b>No encontramos resultados</b><p>Prueba otra búsqueda o agrega un servicio.</p></div>
+    </section>
+
+    <section class="tip-card">
+      <span class="tip-icon">✦</span><div><b>Un consejo útil</b><p>Agrega los números de confianza de tu barrio: técnico, gasfitero, electricista, taxi o centro de salud.</p></div>
+    </section>
+
+    <footer><b>Cerca.</b> Hecho para facilitar tu día a día.<br><span>Los contactos que agregues se guardan en este dispositivo.</span></footer>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navegación principal">
+    <a href="#inicio" class="nav-item active" id="homeNav"><span>⌂</span>Inicio</a>
+    <a href="#emergencyTitle" class="nav-item" id="emergencyNav"><span>＋</span>Emergencias</a>
+    <a href="#serviceList" class="nav-item" id="directoryNav"><span>▤</span>Directorio</a>
+  </nav>
+
+  <dialog id="serviceDialog">
+    <form id="serviceForm" method="dialog">
+      <div class="dialog-head"><div><span class="eyebrow">TU DIRECTORIO</span><h2 id="dialogTitle">Agregar servicio</h2></div><button type="button" class="close-btn" id="closeDialog" aria-label="Cerrar">×</button></div>
+      <input type="hidden" id="serviceId">
+      <label>Nombre del servicio<input id="serviceName" maxlength="60" placeholder="Ej. Electricista de confianza" required></label>
+      <label>Categoría<select id="serviceCategory"><option>Salud</option><option>Transporte</option><option>Hogar</option><option>Otros</option></select></label>
+      <label>Teléfono<input id="servicePhone" type="tel" inputmode="tel" maxlength="25" placeholder="Ej. 987654321"></label>
+      <label>Dirección o referencia<input id="serviceAddress" maxlength="100" placeholder="Ej. Av. principal, cerca del mercado"></label>
+      <label>Nota (opcional)<textarea id="serviceNote" maxlength="180" rows="2" placeholder="Horario, precio aproximado u otro dato"></textarea></label>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelBtn">Cancelar</button><button type="submit" class="primary-btn">Guardar servicio</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
